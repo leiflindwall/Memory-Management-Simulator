@@ -1,0 +1,155 @@
+t = 0: Process 1 arrives
+	Input Queue:[1 ]
+	Memory map:
+		0-1999: Free frame(s)
+       Process 2 arrives
+	Input Queue:[1 2 ]
+	Memory map:
+		0-1999: Free frame(s)
+	MM moves process 1 to memory
+	Memory map:
+		0-399: Process 1, Page 1
+		400-1999: Free frame(s)
+	MM moves process 2 to memory
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1999: Free frame(s)
+t = 100: Process 3 arrives
+	Input Queue:[3 ]
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1999: Free frame(s)
+         Process 4 arrives
+	Input Queue:[3 4 ]
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1999: Free frame(s)
+	MM moves process 3 to memory
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 3, Page 1
+		1600-1999: Free frame(s)
+	MM moves process 4 to memory
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 3, Page 1
+		1600-1999: Process 4, Page 1
+t = 200: Process 5 arrives
+	Input Queue:[5 ]
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 3, Page 1
+		1600-1999: Process 4, Page 1
+t = 1000: Process 3 completes
+	Memory map:
+		0-399: Process 1, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Free frame(s)
+		1600-1999: Process 4, Page 1
+          Process 1 completes
+	Memory map:
+		0-399: Free frame(s)
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Free frame(s)
+		1600-1999: Process 4, Page 1
+	MM moves process 5 to memory
+	Memory map:
+		0-399: Process 5, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 5, Page 2
+		1600-1999: Process 4, Page 1
+t = 1200: Process 6 arrives
+	Input Queue:[6 ]
+	Memory map:
+		0-399: Process 5, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 5, Page 2
+		1600-1999: Process 4, Page 1
+t = 1500: Process 7 arrives
+	Input Queue:[6 7 ]
+	Memory map:
+		0-399: Process 5, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 5, Page 2
+		1600-1999: Process 4, Page 1
+t = 1600: Process 8 arrives
+	Input Queue:[6 7 8 ]
+	Memory map:
+		0-399: Process 5, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 5, Page 2
+		1600-1999: Process 4, Page 1
+t = 1800: Process 5 completes
+	Memory map:
+		0-399: Free frame(s)
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Free frame(s)
+		1600-1999: Process 4, Page 1
+	MM moves process 6 to memory
+	Memory map:
+		0-399: Process 6, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Free frame(s)
+		1600-1999: Process 4, Page 1
+	MM moves process 8 to memory
+	Memory map:
+		0-399: Process 6, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 8, Page 1
+		1600-1999: Process 4, Page 1
+t = 2000: Process 4 completes
+	Memory map:
+		0-399: Process 6, Page 1
+		400-799: Process 2, Page 1
+		800-1199: Process 2, Page 2
+		1200-1599: Process 8, Page 1
+		1600-1999: Free frame(s)
+          Process 2 completes
+	Memory map:
+		0-399: Process 6, Page 1
+		400-1199: Free frame(s)
+		1200-1599: Process 8, Page 1
+		1600-1999: Free frame(s)
+	MM moves process 7 to memory
+	Memory map:
+		0-399: Process 6, Page 1
+		400-799: Process 7, Page 1
+		800-1199: Process 7, Page 2
+		1200-1599: Process 8, Page 1
+		1600-1999: Free frame(s)
+t = 2300: Process 8 completes
+	Memory map:
+		0-399: Process 6, Page 1
+		400-799: Process 7, Page 1
+		800-1199: Process 7, Page 2
+		1200-1999: Free frame(s)
+t = 2500: Process 7 completes
+	Memory map:
+		0-399: Process 6, Page 1
+		400-1999: Free frame(s)
+t = 3600: Process 6 completes
+	Memory map:
+		0-1999: Free frame(s)
+Average turnaround: 1437.5 (11500/8)
+
