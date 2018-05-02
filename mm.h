@@ -1,6 +1,6 @@
+#pragma once
+
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <queue>
 #include <vector>
 #include <string>
@@ -38,6 +38,8 @@ void printProcess(process &p)
     cout << "Block size " << i << ": " << p.block_sizes[i] << " ";
   }
   cout << endl;
+
+  cout << "Term time: " << p.term_time << endl;
 }
 
 void sumBlocks(process &p, int &sum)
@@ -94,14 +96,13 @@ void allocatePages(vector<block> &mmap, int &m_size, int &p_size)
 // helper function to remove a process from memory
 void adjust_memory(vector<block> &mmap, int &pnum)
 {
-  // remove the specified process from memory
-  for(int i = 0; i < mmap.size(); i++)
+  for(int i = 0; i < mmap.size(); ++i)
   {
-    if(mmap[i].current_process == pnum);
+    if(mmap[i].current_process == pnum)
     {
       mmap[i].current_process = 0;
       mmap[i].in_use = false;
-      mmap[i].number = i;
+      mmap[i].number = i+1;
     }
   }
 }

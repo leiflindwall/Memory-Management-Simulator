@@ -1,4 +1,7 @@
-all: mm
+all: memory_simulator
+
+memory_simulator: mm
+	./mm
 
 mm: mm.o
 	g++ mm.o -o mm

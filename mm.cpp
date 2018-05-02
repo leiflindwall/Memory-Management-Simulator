@@ -1,20 +1,8 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <queue>
-#include <vector>
-#include <string>
-#include <fstream>
 #include "mm.h"
 
-using namespace std;
-
 void readFile(string, vector<process> &);
-//void allocatePages(vector<block> &, int &, int &);
 void printInputQ(queue<process> &);
-void memory_manager(vector<block> &, queue<process> &, int &, int &, int &);
-//void sumBlocks(process &, int &);
-//void adjust_memory(vector<block> &, int &);
+void memory_manager(vector<block> &, vector<process> &, queue<process> &, int &, int &, int &);
 
 int main()
 {
@@ -54,8 +42,9 @@ int main()
     {
       if(plist[i].term_time == virtual_clock)
       {
-        cout << "t = " << virtual_clock << " Process " << i+1 << " completes" << endl;
-        adjust_memory(memory_map, i);
+        cout << "\nt = " << virtual_clock << " Process " << i+1 << " completes" << endl;
+        int pnum = i + 1;
+        adjust_memory(memory_map, pnum);
         printMemoryMap(memory_map);
       }
     }
@@ -70,9 +59,10 @@ int main()
         input_q.push(plist[i]);
         cout << "t = " << virtual_clock << " Process " << (i+1) << " arrives" << endl;
         //printProcess(plist[i]);
-        int sum = 0;
-        sumBlocks(plist[i], sum);
-        cout << "space req's: " << sum << endl;
+        //testing space requirements
+        //int sum = 0;
+        //sumBlocks(plist[i], sum);
+        //cout << "space req's: " << sum << endl;
         printInputQ(input_q);
         //printMemoryMap(memory_map);
       }
@@ -81,20 +71,27 @@ int main()
     // check for free memory to add a process to
     for(int i = 0; i < input_q.size(); i++)
     {
-      memory_manager(memory_map, input_q, memory_size, page_size, virtual_clock);
+      memory_manager(memory_map, plist, input_q, memory_size, page_size, virtual_clock);
     }
-
 
 
     // increment the virtual clock
     virtual_clock++;
   }
 
+
+  // verify the proccess list
+  for(int i = 0; i < plist.size(); i++)
+  {
+    printProcess(plist[i]);
+  }
+  cout << endl;
+
   //system("PAUSE");
   return 0;
 }
 
-void memory_manager(vector<block> &mmap, queue<process> &pq, int &m_size, int &p_size, int& current_time)
+void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq, int &m_size, int &p_size, int& current_time)
 {
   // get the process at the head of the Queue
   process current_proc = pq.front();
@@ -133,6 +130,15 @@ void memory_manager(vector<block> &mmap, queue<process> &pq, int &m_size, int &p
     // calculate end time
     current_proc.term_time = current_time + current_proc.end_time;
     cout << "Term time: " << current_proc.term_time << endl;
+
+    // update term time in process
+    for(int i = 0; i < pl.size(); i++)
+    {
+      if(pl[i].pid == current_proc.pid)
+      {
+        pl[i].term_time = current_proc.term_time;
+      }
+    }
 
     int page_count = 1;
     for(int i = 0; i < mmap.size(); i++)
