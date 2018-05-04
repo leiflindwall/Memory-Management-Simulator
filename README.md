@@ -9,6 +9,8 @@ Alexander Lavrov alavrov@csu.fullerton.edu
 
 Marc Liander Reyes mlcr@csu.fullerton.edu
 
+Trung Ngo ndtrung95@csu.fullerton.edu
+
 Instructions:
 
 This project was written in C/C++ and is meant to be run in a UNIX-style command line terminal that supports GCC, Makefiles.
