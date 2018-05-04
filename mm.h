@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include <queue>
 #include <vector>
 #include <string>
@@ -14,6 +15,7 @@ struct process
   int start_time;
   int end_time;
   int term_time;
+  int turnaround_time;
   int num_blocks;
   vector<int> block_sizes;
 };
@@ -44,13 +46,11 @@ void printProcess(process &p)
 
 void sumBlocks(process &p, int &sum)
 {
-  //int sum = 0;
   sum = 0;
   for(int i = 0; i < p.num_blocks; i++)
   {
     sum += p.block_sizes[i];
   }
-  //return sum;
 }
 
 // helper function to print the memory map
