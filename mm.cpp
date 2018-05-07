@@ -6,7 +6,7 @@ void memory_manager(vector<block> &, vector<process> &, queue<process> &, int &,
 
 int main()
 {
-  int memory_size, page_size;
+  int memory_size, page_size, mem_process_count;
   string filename;
   int virtual_clock = 0;
   vector<process> plist;
@@ -37,6 +37,8 @@ int main()
     printProcess(plist[i]);
   }
   cout << endl;
+  
+  mem_process_count = 0;
 
   // start the clock
   while(virtual_clock != 100000)
@@ -53,6 +55,7 @@ int main()
 
         // calculate and add the completed process's turnaround_time
         plist[i].turnaround_time = plist[i].term_time - plist[i].start_time;
+	mem_process_count++;
       }
     }
 
@@ -65,11 +68,15 @@ int main()
         input_q.push(plist[i]);
         cout << "t = " << virtual_clock << " Process " << (i+1) << " arrives" << endl;
         printInputQ(input_q);
+	mem_process_count++;
       }
     }
 
     // invoke the memory manager
-    memory_manager(memory_map, plist, input_q, memory_size, page_size, virtual_clock);
+    while (mem_process_count > 0) {
+        memory_manager(memory_map, plist, input_q, memory_size, page_size, virtual_clock);
+	mem_process_count--;
+    }
 
     // increment the virtual clock
     virtual_clock++;
