@@ -39,7 +39,7 @@ int main()
     printProcess(plist[i]);
   }
   cout << endl;
-  
+
   mem_process_count = 0;
 
   // start the clock
@@ -50,14 +50,14 @@ int main()
     {
       if(plist[i].term_time == virtual_clock)
       {
-        cout << "\nt = " << virtual_clock << " Process " << i+1 << " completes" << endl;
+        cout << "t = " << virtual_clock << " Process " << i+1 << " completes" << endl;
         int pnum = i + 1;
         adjust_memory(memory_map, pnum);
         printMemoryMap(memory_map, page_size);
 
         // calculate and add the completed process's turnaround_time
         plist[i].turnaround_time = plist[i].term_time - plist[i].start_time;
-	mem_process_count++;
+	       mem_process_count++;
       }
     }
 
@@ -85,11 +85,11 @@ int main()
   }
 
   // verify the proccess list again
-  for(int i = 0; i < plist.size(); i++)
-  {
-    printProcess(plist[i]);
-  }
-  cout << endl;
+  //for(int i = 0; i < plist.size(); i++)
+  //{
+  //  printProcess(plist[i]);
+  //}
+  //cout << endl;
 
   // calculate the average turnaround_time
   for(int i = 0; i < plist.size(); i++)
@@ -140,11 +140,11 @@ void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq
     // if we found space, add the head of the queue to the memory block;
     if(space_found)
     {
-      cout << "\tcurrent clock: " << current_time << endl;
+      //cout << "\tcurrent clock: " << current_time << endl;
       cout << "\tMM moves process " << current_proc.pid << " to memory" << endl;
       // calculate end time
       current_proc.term_time = current_time + current_proc.end_time;
-      cout << "Term time: " << current_proc.term_time << endl;
+      //cout << "Term time: " << current_proc.term_time << endl;
 
       // update term time in process
       for(int i = 0; i < pl.size(); i++)

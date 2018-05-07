@@ -86,8 +86,9 @@ void printMemoryMap(vector<block> &mmap, int ps)
     	cout << mmap[i].base << "-" << mmap[i].limit;
 		cout << " Process " << mmap[i].current_process;
 		cout << ", Page " << mmap[i].number << endl;
-    } 
+    }
   }
+  cout << endl;
 }
 
 // helper function to divide the memory chunk into pages
