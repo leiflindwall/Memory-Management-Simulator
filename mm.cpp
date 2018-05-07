@@ -123,11 +123,12 @@ void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq
       {
         contiguous_space+=p_size;
       }
-      else
-      {
+      // not necessary
+      //else
+      //{
         // if this current block is in use, end the contiguous block
-        contiguous_space = 0;
-      }
+      //  contiguous_space = 0;
+      //}
 
       // if our block is big enough, add the head of the input queue to it
       if(contiguous_space >= space_req)
