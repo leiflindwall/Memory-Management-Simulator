@@ -4,9 +4,11 @@ void readFile(string, vector<process> &);
 void printInputQ(queue<process> &);
 void memory_manager(vector<block> &, vector<process> &, queue<process> &, int &, int &, int &);
 
+int page_size;
+
 int main()
 {
-  int memory_size, page_size, mem_process_count;
+  int memory_size, mem_process_count;
   string filename;
   int virtual_clock = 0;
   vector<process> plist;
@@ -51,7 +53,7 @@ int main()
         cout << "\nt = " << virtual_clock << " Process " << i+1 << " completes" << endl;
         int pnum = i + 1;
         adjust_memory(memory_map, pnum);
-        printMemoryMap(memory_map);
+        printMemoryMap(memory_map, page_size);
 
         // calculate and add the completed process's turnaround_time
         plist[i].turnaround_time = plist[i].term_time - plist[i].start_time;
@@ -177,7 +179,7 @@ void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq
 
       // print the memory Map and updated queue
       printInputQ(pq);
-      printMemoryMap(mmap);
+      printMemoryMap(mmap, page_size);
     }
   }
 }

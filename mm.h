@@ -54,7 +54,7 @@ void sumBlocks(process &p, int &sum)
 }
 
 // helper function to print the memory map
-void printMemoryMap(vector<block> &mmap)
+void printMemoryMap(vector<block> &mmap, int ps)
 {
   cout << "\tMemory Map: ";
   for(int i = 0; i < mmap.size(); i++)
@@ -63,16 +63,30 @@ void printMemoryMap(vector<block> &mmap)
     {
       cout << "\t\t";
     }
-    cout << mmap[i].base << "-" << mmap[i].limit;
-    if(mmap[i].current_process == 0)
+    //cout << mmap[i].base << "-" << mmap[i].limit;
+    if (mmap[i].current_process == 0)
     {
-      cout << " Free";
+		int j = i+1;
+		int lower = mmap[i].base;
+		int upper = mmap[i].limit;
+		for (j; j < mmap.size(); j++) {
+			if (mmap[j].current_process == 0) {
+				upper += ps;
+			}
+			else {
+				break;
+			}
+		}
+		cout << lower << "-" << upper;
+		cout << " Free frame(s)" << endl;
+		i = j-1;
     }
     else
     {
-      cout << " Process " << mmap[i].current_process;
-    }
-    cout << ", Page " << mmap[i].number << endl;
+    	cout << mmap[i].base << "-" << mmap[i].limit;
+		cout << " Process " << mmap[i].current_process;
+		cout << ", Page " << mmap[i].number << endl;
+    } 
   }
 }
 
