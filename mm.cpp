@@ -28,17 +28,18 @@ int main()
   //cin >> filename;
   //readFile(filename, plist);
   readFile("in1.txt", plist);
-  cout << "file read\n";
+  cout << endl;
+  //cout << "file read\n";
 
   // allocate memory
   allocatePages(memory_map, memory_size, page_size);
 
   // verify the proccess list was read correcty
-  for(int i = 0; i < plist.size(); i++)
-  {
-    printProcess(plist[i]);
-  }
-  cout << endl;
+  //for(int i = 0; i < plist.size(); i++)
+  //{
+  //  printProcess(plist[i]);
+  //}
+  //cout << endl;
 
   mem_process_count = 0;
 
@@ -207,7 +208,7 @@ void readFile(string input_file, vector<process> &process_list)
 		for (int j = 0; j < current_proc.num_blocks; ++j)
 		{
 			infile >> block;
-      cout << "block: " << block << endl;
+      //cout << "block: " << block << endl;
       temp_blocks.push_back(block);
 		}
     current_proc.term_time = -1;
