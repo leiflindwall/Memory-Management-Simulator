@@ -24,10 +24,9 @@ int main()
   page_size *= 100;
 
   // read in file
-  //cout << "WORKLOAD FILE: ";
-  //cin >> filename;
-  //readFile(filename, plist);
-  readFile("in1.txt", plist);
+  cout << "WORKLOAD FILE: ";
+  cin >> filename;
+  readFile(filename, plist);
   cout << endl;
 
   // allocate memory
@@ -54,10 +53,9 @@ int main()
         int pnum = i + 1;
         adjust_memory(memory_map, pnum);
         printMemoryMap(memory_map, page_size);
-
+        
         // calculate and add the completed process's turnaround_time
         plist[i].turnaround_time = plist[i].term_time - plist[i].start_time;
-	      mem_process_count++;
       }
     }
 
@@ -91,7 +89,7 @@ int main()
     avg_turn_time += plist[i].turnaround_time;
   }
   avg_turn_time /= (plist.size());
-  cout << "Average turnaround time: " << avg_turn_time << endl;
+  cout << "Average turnaround time: " << showpoint << avg_turn_time << endl;
 
   //system("PAUSE");
   return 0;
@@ -106,7 +104,7 @@ void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq
     int space_req = 0;
     sumBlocks(current_proc, space_req);
     bool space_found = false;
-    int contiguous_space = 0;
+    int empty_space = 0;
 
     // search for free space in memory
     for(int i = 0; i < mmap.size(); i++)
@@ -114,11 +112,11 @@ void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq
       // if the current block is free, add it to the contiguous_space
       if(!mmap[i].in_use)
       {
-        contiguous_space+=p_size;
+        empty_space+=p_size;
       }
 
       // if our block is big enough, add the head of the input queue to it
-      if(contiguous_space >= space_req)
+      if(empty_space >= space_req)
       {
         space_found = true;
         break;
@@ -173,7 +171,8 @@ void memory_manager(vector<block> &mmap, vector<process> &pl, queue<process> &pq
 void readFile(string input_file, vector<process> &process_list)
 {
 	ifstream infile;
-	infile.open("in1.txt");
+	//infile.open("in1.txt");
+  infile.open(input_file.c_str());
 	int num_processes;
 	process current_proc;
   int block;
