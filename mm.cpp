@@ -53,7 +53,8 @@ int main()
         int pnum = i + 1;
         adjust_memory(memory_map, pnum);
         printMemoryMap(memory_map, page_size);
-        
+        mem_process_count++;
+
         // calculate and add the completed process's turnaround_time
         plist[i].turnaround_time = plist[i].term_time - plist[i].start_time;
       }
